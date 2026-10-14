@@ -1,4 +1,4 @@
-# @devmode/notifications
+# @jhayrdev/notifications
 
 Android-first custom notifications for React Native and Expo, rendered natively with Kotlin, `RemoteViews`, AndroidX notifications, and Firebase Cloud Messaging.
 
@@ -18,7 +18,7 @@ This package is Android-only. It requires a native/development build and does no
 ## Install and configure
 
 ```bash
-npm install @devmode/notifications
+npm install @jhayrdev/notifications
 npx devmode-notifications setup
 ```
 
@@ -33,7 +33,7 @@ Configure Firebase in `app.json`:
     },
     "plugins": [
       [
-        "@devmode/notifications",
+        "@jhayrdev/notifications",
         { "defaultIcon": "devmode_notification_icon" }
       ]
     ]
@@ -55,7 +55,7 @@ import {
   createChannel,
   displayNotification,
   requestNotificationPermission,
-} from '@devmode/notifications';
+} from '@jhayrdev/notifications';
 
 await requestNotificationPermission();
 await createChannel({ id: 'orders', name: 'Orders', importance: 'high' });

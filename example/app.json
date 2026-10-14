@@ -7,6 +7,6 @@
     "android": {
       "package": "com.devmode.notifications.example"
     },
-    "plugins": [["@devmode/notifications", { "defaultIcon": "devmode_notification_icon" }]]
+    "plugins": [["@jhayrdev/notifications", { "defaultIcon": "devmode_notification_icon" }]]
   }
 }

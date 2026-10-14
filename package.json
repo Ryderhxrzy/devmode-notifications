@@ -1,18 +1,29 @@
 {
-  "name": "@devmode/notifications",
-  "version": "0.1.0",
+  "name": "@jhayrdev/notifications",
+  "version": "1.0.0",
   "description": "Custom native Android notifications for React Native and Expo",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "bin": {
     "devmode-notifications": "plugin/cli.js"
   },
-  "files": ["android", "build", "plugin", "app.plugin.js", "expo-module.config.json", "README.md"],
+  "files": [
+    "android",
+    "build",
+    "plugin",
+    "app.plugin.js",
+    "expo-module.config.json",
+    "README.md"
+  ],
   "scripts": {
     "build": "node internal/module_scripts/build.js",
     "clean": "node internal/module_scripts/clean.js",
     "lint": "eslint src/",
-    "test": "node internal/module_scripts/test.js",
+    "test": "node --check plugin/index.js && node --check plugin/cli.js && node --check app.plugin.js",
     "prepare": "node internal/module_scripts/prepare.js",
     "open:ios": "node internal/module_scripts/open-ios.js",
     "open:android": "node internal/module_scripts/open-android.js",

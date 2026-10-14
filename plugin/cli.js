@@ -23,8 +23,8 @@ function inspectProject() {
   const document = readJson(appJsonPath);
   const expo = document.expo || document;
   const plugins = expo.plugins || [];
-  const hasPlugin = plugins.some(plugin => plugin === '@devmode/notifications' || (Array.isArray(plugin) && plugin[0] === '@devmode/notifications'));
-  if (!hasPlugin) findings.push(['error', '@devmode/notifications is missing from expo.plugins.']);
+  const hasPlugin = plugins.some(plugin => plugin === '@jhayrdev/notifications' || (Array.isArray(plugin) && plugin[0] === '@jhayrdev/notifications'));
+  if (!hasPlugin) findings.push(['error', '@jhayrdev/notifications is missing from expo.plugins.']);
   const servicesFile = expo.android?.googleServicesFile;
   if (!servicesFile) findings.push(['error', 'expo.android.googleServicesFile is not configured.']);
   else if (!fs.existsSync(path.resolve(projectRoot, servicesFile))) findings.push(['error', `${servicesFile} does not exist.`]);
@@ -47,10 +47,10 @@ function setup() {
   }
   const expo = result.expo;
   expo.plugins = expo.plugins || [];
-  const hasPlugin = expo.plugins.some(plugin => plugin === '@devmode/notifications' || (Array.isArray(plugin) && plugin[0] === '@devmode/notifications'));
-  if (!hasPlugin) expo.plugins.push('@devmode/notifications');
+  const hasPlugin = expo.plugins.some(plugin => plugin === '@jhayrdev/notifications' || (Array.isArray(plugin) && plugin[0] === '@jhayrdev/notifications'));
+  if (!hasPlugin) expo.plugins.push('@jhayrdev/notifications');
   fs.writeFileSync(result.appJsonPath, `${JSON.stringify(result.document, null, 2)}\n`);
-  console.log('Added @devmode/notifications to app.json.');
+  console.log('Added @jhayrdev/notifications to app.json.');
   if (!expo.android?.googleServicesFile) console.log('Next: set expo.android.googleServicesFile to your Firebase google-services.json.');
 }
 

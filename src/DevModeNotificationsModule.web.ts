@@ -4,7 +4,7 @@ import type { DevModeNotificationsModuleEvents } from './DevModeNotifications.ty
 
 class DevModeNotificationsModule extends NativeModule<DevModeNotificationsModuleEvents> {
   private unsupported(): never {
-    throw new Error('@devmode/notifications is Android-only.');
+    throw new Error('@jhayrdev/notifications is Android-only.');
   }
 
   async createChannelAsync(): Promise<void> { this.unsupported(); }

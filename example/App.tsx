@@ -2,7 +2,7 @@ import {
   createChannel,
   displayNotification,
   requestNotificationPermission,
-} from '@devmode/notifications';
+} from '@jhayrdev/notifications';
 import { useEffect, useState } from 'react';
 import { Alert, Button, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
@@ -51,7 +51,7 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.screen}>
-      <Text style={styles.title}>@devmode/notifications</Text>
+      <Text style={styles.title}>@jhayrdev/notifications</Text>
       <Text style={styles.status}>{ready ? 'Notification permission granted' : 'Waiting for notification permission'}</Text>
       <View style={styles.buttons}>
         <Button title="Basic notification" onPress={() => void show('basic')} />
