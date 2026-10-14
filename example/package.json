@@ -1,0 +1,21 @@
+{
+  "name": "devmode-notifications-example",
+  "version": "1.0.0",
+  "private": true,
+  "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android"
+  },
+  "dependencies": {
+    "@devmode/notifications": "file:..",
+    "expo": "^57.0.27",
+    "expo-dev-client": "~57.0.20",
+    "react": "19.2.3",
+    "react-native": "0.86.3"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.2",
+    "typescript": "^5.9.2"
+  }
+}

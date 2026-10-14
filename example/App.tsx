@@ -1,42 +1,70 @@
-import DevModeNotifications from 'my-module';
-import { useEvent } from 'expo';
-import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import {
+  createChannel,
+  displayNotification,
+  requestNotificationPermission,
+} from '@devmode/notifications';
+import { useEffect, useState } from 'react';
+import { Alert, Button, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
-  const onChangePayload = useEvent(DevModeNotifications, 'onChange');
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    void (async () => {
+      const permission = await requestNotificationPermission();
+      await createChannel({
+        id: 'demo',
+        name: 'Demo notifications',
+        description: 'Notifications created by the example app',
+        importance: 'high',
+      });
+      setReady(permission.granted);
+    })().catch(error => Alert.alert('Setup failed', String(error)));
+  }, []);
+
+  const show = async (template: 'basic' | 'hero' | 'progress') => {
+    await displayNotification({
+      id: `demo-${template}`,
+      channelId: 'demo',
+      template,
+      content: {
+        title: template === 'progress' ? 'Downloading update' : 'DevMode notification',
+        subtitle: 'Rendered by Kotlin + RemoteViews',
+        body: 'Configured entirely from TypeScript.',
+        badge: template.toUpperCase(),
+        image: template === 'hero' ? 'https://picsum.photos/800/400' : undefined,
+        progress: template === 'progress' ? 68 : undefined,
+      },
+      appearance: {
+        backgroundColor: '#101820',
+        titleColor: '#FFFFFF',
+        bodyColor: '#D5D9DC',
+        accentColor: '#FFB000',
+        smallIcon: 'devmode_notification_icon',
+      },
+      actions: [
+        { id: 'open', title: 'Open app', type: 'openApp' },
+        { id: 'acknowledge', title: 'Acknowledge', type: 'background', payload: { source: 'example' } },
+      ],
+    });
+  };
+
   return (
-    <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.container}>
-        <Text style={styles.header}>Module API Example</Text>
-        <Group name="Async functions">
-          <Button
-            title="Set value"
-            onPress={async () => {
-              await DevModeNotifications.setValueAsync('Hello from JS!');
-            }}
-          />
-        </Group>
-        <Group name="Events">
-          <Text>{onChangePayload?.value}</Text>
-        </Group>
-      </ScrollView>
+    <SafeAreaView style={styles.screen}>
+      <Text style={styles.title}>@devmode/notifications</Text>
+      <Text style={styles.status}>{ready ? 'Notification permission granted' : 'Waiting for notification permission'}</Text>
+      <View style={styles.buttons}>
+        <Button title="Basic notification" onPress={() => void show('basic')} />
+        <Button title="Hero notification" onPress={() => void show('hero')} />
+        <Button title="Progress notification" onPress={() => void show('progress')} />
+      </View>
     </SafeAreaView>
   );
 }
 
-function Group(props: { name: string; children: React.ReactNode }) {
-  return (
-    <View style={styles.group}>
-      <Text style={styles.groupHeader}>{props.name}</Text>
-      {props.children}
-    </View>
-  );
-}
-
-const styles = {
-  header: { fontSize: 30, margin: 20 },
-  groupHeader: { fontSize: 20, marginBottom: 20 },
-  group: { margin: 20, backgroundColor: '#fff', borderRadius: 10, padding: 20 },
-  container: { flex: 1, backgroundColor: '#eee' },
-  view: { flex: 1, height: 200 },
-};
+const styles = StyleSheet.create({
+  screen: { flex: 1, padding: 24, justifyContent: 'center', backgroundColor: '#eef2f5' },
+  title: { fontSize: 25, fontWeight: '700', marginBottom: 8 },
+  status: { color: '#44515c', marginBottom: 24 },
+  buttons: { gap: 12 },
+});

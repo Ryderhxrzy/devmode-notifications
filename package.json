@@ -1,9 +1,13 @@
 {
-  "name": "my-module",
+  "name": "@devmode/notifications",
   "version": "0.1.0",
   "description": "Custom native Android notifications for React Native and Expo",
   "main": "build/index.js",
   "types": "build/index.d.ts",
+  "bin": {
+    "devmode-notifications": "plugin/cli.js"
+  },
+  "files": ["android", "build", "plugin", "app.plugin.js", "expo-module.config.json", "README.md"],
   "scripts": {
     "build": "node internal/module_scripts/build.js",
     "clean": "node internal/module_scripts/clean.js",
@@ -11,34 +15,38 @@
     "test": "node internal/module_scripts/test.js",
     "prepare": "node internal/module_scripts/prepare.js",
     "open:ios": "node internal/module_scripts/open-ios.js",
-    "open:android": "node internal/module_scripts/open-android.js"
+    "open:android": "node internal/module_scripts/open-android.js",
+    "doctor": "node ./plugin/doctor.js"
   },
   "keywords": [
     "react-native",
     "expo",
-    "my-module",
-    "DevModeNotifications"
+    "notifications",
+    "firebase",
+    "fcm",
+    "remoteviews",
+    "android"
   ],
-  "repository": "https://github.com/Ryderhxrzy/my-module",
+  "repository": "https://github.com/Ryderhxrzy/devmode-notifications",
   "bugs": {
-    "url": "https://github.com/Ryderhxrzy/my-module/issues"
+    "url": "https://github.com/Ryderhxrzy/devmode-notifications/issues"
   },
   "author": "Jhay-R Z. Cervantes <jhayrcervantes0981@gmail.com> (https://github.com/Ryderhxrzy)",
   "license": "MIT",
-  "homepage": "https://github.com/Ryderhxrzy/my-module#readme",
+  "homepage": "https://github.com/Ryderhxrzy/devmode-notifications#readme",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.26.0",
     "@types/jest": "^29.2.1",
-    "@types/react": "~19.1.1",
+    "@types/react": "~19.2.2",
     "babel-preset-expo": "~55.0.8",
     "eslint": "~9.39.4",
     "eslint-config-universe": "^15.0.3",
     "expo": "^57.0.27",
     "jest": "^29.7.0",
-    "jest-expo": "~55.0.9",
+    "jest-expo": "~57.0.6",
     "prettier": "^3.0.0",
-    "react-native": "0.82.1",
+    "react-native": "0.86.3",
     "typescript": "^5.9.2"
   },
   "jest": {

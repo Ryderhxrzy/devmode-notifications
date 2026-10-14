@@ -49,9 +49,13 @@ example/vendor/
 # node.js
 #
 node_modules/
+.npm-cache/
+package/
 npm-debug.log
 yarn-debug.log
 yarn-error.log
 
 # Expo
 .expo/*
+example/android/
+example/.expo/

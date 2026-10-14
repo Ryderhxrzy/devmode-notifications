@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "name": "DevMode Notifications Example",
+    "slug": "devmode-notifications-example",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "android": {
+      "package": "com.devmode.notifications.example"
+    },
+    "plugins": [["@devmode/notifications", { "defaultIcon": "devmode_notification_icon" }]]
+  }
+}
